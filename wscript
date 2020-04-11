@@ -56,5 +56,5 @@ def upload(ctx):
     if not os.path.isfile(token_file):
         ctx.fatal("missing .vagrantcloud see README.rst for more information.")
 
-    ctx.exec_command(f"{ctx.env.PACKER[0]} build -except vagrant-cloud -var-file {token_file} -var 'version={VERSION}' -var 'version_description={long_description}' mn.json",
+    ctx.exec_command(f"{ctx.env.PACKER[0]} build -var-file {token_file} -var 'version={VERSION}' -var 'version_description={long_description}' mn.json",
                      stdout=None, stderr=None)
