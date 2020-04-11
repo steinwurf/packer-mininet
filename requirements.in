@@ -1,0 +1,4 @@
+# Issue https://github.com/bebraw/pypandoc/issues/174 prevents us from
+# using the pypi package. Once a new release is pushed to pypi we can
+# switch to using that.
+git+git://github.com/bebraw/pypandoc.git@87912f0

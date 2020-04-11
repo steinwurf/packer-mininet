@@ -1,0 +1,37 @@
+# waf projects
+waf-*
+waf3-*
+.waf-*
+.waf3-*
+.lock-*
+build
+build_current
+resolve_symlinks
+resolved_dependencies
+
+# Emacs temp / auto save
+\#*#
+*.#*
+*~
+
+# Python
+*.pyc
+.cache
+.tox
+pytest
+.pytest_cache
+pytest_environment_*
+pip_packages
+
+# Visual Studio ignore
+*.bat
+*.sln
+*.suo
+*.user
+*.ncb
+*.sdf
+*.opensdf
+*.log
+VSProjects
+*.pyproj
+.vscode
