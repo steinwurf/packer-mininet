@@ -6,5 +6,13 @@
         "sources": [
             "https://releases.hashicorp.com/packer/1.5.5/packer_1.5.5_linux_amd64.zip"
         ]
+    },
+    {
+        "name": "packer-vagrant-cloud",
+        "resolver": "http",
+        "extract": true,
+        "sources": [
+            "https://github.com/armab/packer-post-processor-vagrant-cloud-standalone/releases/download/v0.1.4/packer-post-processor-vagrant-cloud-standalone_linux_amd64.zip"
+        ]
     }
 ]

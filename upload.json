@@ -1,0 +1,20 @@
+{
+  "builders": [
+    {
+      "type": "file",
+      "content": "Do nothing, Packer just requires at least one builder to be present",
+      "target": "/dev/null"
+    }
+  ],
+  "post-processors": [
+    {
+      "type": "vagrant-cloud-standalone",
+      "access_token": "{{user `cloud_token`}}",
+      "box_tag": "steinwurf/mininet",
+      "provider": "virtualbox",
+      "version": "{{user `version`}}",
+      "version_description": "{{user `version_description`}}",
+      "artifact": "build/box/package.box"
+    }
+  ]
+}

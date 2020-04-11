@@ -1,6 +1,3 @@
-#! /usr/bin/env python
-# encoding: utf-8
-
 import os
 import glob
 import sys
@@ -22,11 +19,14 @@ def configure(conf):
     conf.find_program('packer', exts='',
                       path_list=[str(conf.dependency_path('packer'))])
 
+    conf.find_program('packer-post-processor-vagrant-cloud-standalone', exts='',
+                      path_list=[str(conf.dependency_path('packer-vagrant-cloud'))])
+
 
 def build(bld):
 
     # Run packer build
-    bld.exec_command(f"{bld.env.PACKER[0]} build -except vagrant-cloud -force mn.json",
+    bld.exec_command(f"{bld.env.PACKER[0]} build -except vagrant-cloud -force build.json",
                      stdout=None, stderr=None)
 
 
@@ -56,5 +56,5 @@ def upload(ctx):
     if not os.path.isfile(token_file):
         ctx.fatal("missing .vagrantcloud see README.rst for more information.")
 
-    ctx.exec_command(f"{ctx.env.PACKER[0]} build -var-file {token_file} -var 'version={VERSION}' -var 'version_description={long_description}' mn.json",
-                     stdout=None, stderr=None)
+    ctx.exec_command(f"{ctx.env.PACKER[0]} build -var-file {token_file} -var 'version={VERSION}' -var 'version_description={long_description}' upload.json",
+                     stdout=None, stderr=None, env={'PACKER_PLUGIN_PATH': ctx.dependency_path('packer-vagrant-cloud')})
