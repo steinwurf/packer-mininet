@@ -56,5 +56,32 @@ def upload(ctx):
     if not os.path.isfile(token_file):
         ctx.fatal("missing .vagrantcloud see README.rst for more information.")
 
-    ctx.exec_command(f"{ctx.env.PACKER[0]} build -var-file {token_file} -var 'version={VERSION}' -var 'version_description={long_description}' upload.json",
-                     stdout=None, stderr=None, env={'PACKER_PLUGIN_PATH': ctx.dependency_path('packer-vagrant-cloud')})
+    upload_json = ctx.path.find_node('upload.json')
+
+    if not upload_json:
+        ctx.fatal("Could not find upload.json")
+
+    box = ctx.path.find_node('build/box/package.box')
+
+    if not box:
+        ctx.fatal("Could not find box")
+
+    # To use the vagrant-cloud-standalone plugin we need to do two things:
+    # 1) Use version 1.4.5 of packer (since version 1.5.x is not yet compatible
+    #    with the plugin). See issue:
+    #    https://github.com/armab/packer-post-processor-vagrant-cloud-standalone/issues/6
+    #
+    # 2) Run the packer command with a cwd of the vagrant-cloud-plugin since
+    #    version 1.4.5 of packer does not support the PACKER_PLUGIN_PATH
+    #    environment variable.
+    #
+    # So once vagrant-cloud-standalone supports version 1.5.x of packer we
+    # can avoid this.
+    ctx.exec_command((f"{ctx.env.PACKER[0]} build "
+                      f"-var-file {token_file} "
+                      f"-var 'version={VERSION}' "
+                      f"-var 'box={box}' "
+                      f"-var 'version_description={long_description}' "
+                      f"{upload_json}"),
+                     stdout=None, stderr=None,
+                     cwd=ctx.dependency_path('packer-vagrant-cloud'))

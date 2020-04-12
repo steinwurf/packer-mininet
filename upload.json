@@ -14,7 +14,7 @@
       "provider": "virtualbox",
       "version": "{{user `version`}}",
       "version_description": "{{user `version_description`}}",
-      "artifact": "build/box/package.box"
+      "artifact": "{{user `box`}}"
     }
   ]
 }
