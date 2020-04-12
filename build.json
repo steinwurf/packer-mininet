@@ -6,7 +6,8 @@
       "provider": "virtualbox",
       "type": "vagrant",
       "box_name": "steinwurf-mininet",
-      "output_dir": "build/box"
+      "output_dir": "build/box",
+      "add_force": true
     }
   ],
   "provisioners": [
@@ -16,14 +17,6 @@
       ],
       "execute_command": "echo 'mininet' | sudo -S sh '{{ .Path }}'",
       "type": "shell"
-    }
-  ],
-  "post-processors": [
-    {
-      "type": "vagrant-cloud",
-      "box_tag": "hashicorp/precise64",
-      "access_token": "{{user `cloud_token`}}",
-      "version": "{{user `version`}}"
     }
   ]
 }

@@ -26,7 +26,7 @@ def configure(conf):
 def build(bld):
 
     # Run packer build
-    bld.exec_command(f"{bld.env.PACKER[0]} build -except vagrant-cloud -force build.json",
+    bld.exec_command(f"{bld.env.PACKER[0]} build --force build.json",
                      stdout=None, stderr=None)
 
 

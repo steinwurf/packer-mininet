@@ -4,6 +4,14 @@ About
 This repository contains a Packer (packer.io) configuration for building
 a mininet Vagrant box.
 
+Create and uploading a new box is defined using the following two files:
+
+1. `build.json` this is a Packer JSON file which defines steps building the box.
+2. `upload.json` this Packer JSON files defines how we upload the box to
+   Vagrant cloud.
+
+The provisioning of the box (i.e. what we install) is defined in `setup.sh`.
+
 Building
 --------
 
