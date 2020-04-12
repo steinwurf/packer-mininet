@@ -26,8 +26,11 @@ def configure(conf):
 def build(bld):
 
     # Run packer build
-    bld.exec_command(f"{bld.env.PACKER[0]} build --force build.json",
-                     stdout=None, stderr=None)
+    ret = bld.exec_command(f"{bld.env.PACKER[0]} build -force build.json",
+                           stdout=None, stderr=None)
+
+    if ret != 0:
+        bld.fatal("Build failed")
 
 
 class UploadContext(BuildContext):
