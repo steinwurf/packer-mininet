@@ -4,8 +4,10 @@
 #
 #    pip-compile requirements.in
 #
-git+git://github.com/bebraw/pypandoc.git@87912f0  # via -r requirements.in
-wheel==0.34.2             # via pypandoc
+pypandoc @ git+git://github.com/bebraw/pypandoc.git@87912f0
+    # via -r requirements.in
+wheel==0.38.1
+    # via pypandoc
 
 # The following packages are considered to be unsafe in a requirements file:
 # pip
